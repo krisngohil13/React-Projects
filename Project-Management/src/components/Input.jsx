@@ -1,24 +1,31 @@
 import { forwardRef } from "react";
 
-const Input = forwardRef(({ label, isTextarea, ...props }, ref) => {
-    return (
-        <div className="mb-4 flex flex-col gap-1 my-4 ">
-            <label className="block text-gray-700 text-stone-500 text-sm font-bold uppercase mb-2">{label}</label>
-            {isTextarea ? (
-                <textarea
-                    ref={ref}
-                    className="shadow appearance-none border-stone-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline focus:border-stone-600 resize-none h-32 transition-all duration-300 ease-in-out transform hover:scale-105 focus:scale-105 font-sans tracking-wide"
-                    {...props}
-                ></textarea>
-            ) : (
-                <input
-                    ref={ref}
-                    className="shadow appearance-none border-stone-300 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline  focus:border-stone-600 h-10 transition-all duration-300 ease-in-out transform hover:scale-105 focus:scale-105 font-sans tracking-wide"
-                    {...props}
-                />
-            )}
-        </div>
-    );
+const Input = forwardRef(function Input({ label, textarea, ...props }, ref) {
+  const classes = `
+    w-full 
+    p-2 md:p-3 
+    rounded-md 
+    border-2 border-stone-300 
+    bg-stone-200 
+    text-stone-600 
+    text-sm md:text-base
+    focus:outline-none focus:border-stone-600
+    transition-all duration-300
+    ${textarea ? 'min-h-[8rem] md:min-h-[12rem] resize-none' : 'h-10 md:h-12'}
+  `;
+
+  return (
+    <p className="flex flex-col gap-1 my-4">
+      <label className="text-sm md:text-base font-bold uppercase text-stone-500">
+        {label}
+      </label>
+      {textarea ? (
+        <textarea ref={ref} className={classes} {...props} />
+      ) : (
+        <input ref={ref} className={classes} {...props} />
+      )}
+    </p>
+  );
 });
 
 export default Input;
