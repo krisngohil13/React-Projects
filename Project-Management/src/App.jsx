@@ -20,7 +20,8 @@ function App() {
   function handleAddProject(projectData) {
     const newProject = {
       ...projectData,
-      id: Math.random()
+      id: Math.random(),
+      tasks: []
     };
 
     setProjectState(prev => ({
@@ -49,8 +50,21 @@ function App() {
     setProjectState(prev => ({
       ...prev,
       projects: prev.projects.map(project => 
-        project.id === editedProject.id ? editedProject : project
+        project.id === editedProject.id 
+          ? { ...editedProject, tasks: project.tasks }
+          : project
       ),
+    }));
+  }
+
+  function handleTaskUpdate(projectId, updatedTasks) {
+    setProjectState(prev => ({
+      ...prev,
+      projects: prev.projects.map(project =>
+        project.id === projectId 
+          ? { ...project, tasks: updatedTasks }
+          : project
+      )
     }));
   }
 
@@ -78,6 +92,7 @@ function App() {
         project={selectedProject} 
         onDelete={handleDeleteProject}
         onEdit={handleEditProject}
+        handleTaskUpdate={handleTaskUpdate}
       />
     );
   }

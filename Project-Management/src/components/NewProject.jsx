@@ -35,7 +35,7 @@ export default function NewProject({ onAdd, onCancel }) {
                 <div className="bg-stone-200 rounded-lg p-6 shadow-md">
                     <div className="space-y-4">
                         <Input ref={title} label="Project Name" />
-                        <Input ref={description} label="Project Description" isTextarea />
+                        <Input ref={description} label="Project Description" textarea />
                         <Input ref={deadline} label="Project Deadline" type="date" />
                     </div>
                     <menu className="flex justify-end gap-4 mt-8">

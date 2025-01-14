@@ -2,8 +2,9 @@ import { useRef, useState } from 'react';
 import Input from './Input';
 import Modal from './Modal';
 import ConfirmModal from './ConfirmModal';
+import Task from './Task';
 
-export default function ProjectDetails({ project, onDelete, onEdit }) {
+export default function ProjectDetails({ project, onDelete, onEdit, handleTaskUpdate }) {
     const [isEditing, setIsEditing] = useState(false);
     const title = useRef();
     const description = useRef();
@@ -124,6 +125,13 @@ export default function ProjectDetails({ project, onDelete, onEdit }) {
                         </>
                     )}
                 </div>
+
+                {!isEditing && (
+                    <Task 
+                        tasks={project.tasks} 
+                        onUpdateTasks={(updatedTasks) => handleTaskUpdate(project.id, updatedTasks)}
+                    />
+                )}
             </div>
         </>
     );
